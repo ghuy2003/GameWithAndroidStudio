@@ -3,7 +3,7 @@ package vn.edu.tinhoc123.gamewithandroidstudio;
 import android.content.Context;
 
 import androidx.core.content.ContextCompat;
-
+//di chuyen tuong tu nhu player nhung thay vi dung joystick thi se di theo huong nguoi choi
 public class Enemy extends Circle {
 
     private static final double SPEED_PIXELS_PER_SECOND = Player.SPEED_PIXELS_PER_SECOND*0.8;
@@ -33,7 +33,6 @@ public class Enemy extends Circle {
             velocityX = 0;
             velocityY = 0;
         }
-
         positionX+=velocityX;
         positionY+=velocityY;
     }

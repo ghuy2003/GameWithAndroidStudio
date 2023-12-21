@@ -47,7 +47,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         gameLoop = new GameLoop( this, surfaceHolder);
 
-        //khoi tao nguoi choi
+        //khoi tao nguoi choi (set vi tri xuat hien ban dau tren man hinh)
         player = new Player(getContext(), 1000, 500, 30);
 
         setFocusable(true);

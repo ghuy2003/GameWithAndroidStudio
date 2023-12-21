@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF1000</color>
     <color name="player">#5ABBD3</color>
+    <color name="BLUE">#1F44FF</color>
+    <color name="GRAY">#BFC6C8</color>
 </resources>

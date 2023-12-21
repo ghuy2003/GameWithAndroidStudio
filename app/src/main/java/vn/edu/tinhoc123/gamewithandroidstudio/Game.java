@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
+    private final Joystick joystick;
     private GameLoop gameLoop;
 
 
@@ -21,13 +22,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         //dieu khien khi cham (touch)
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                player.setPosition((double) event.getX(),(double) event.getY());
+                if(joystick.isPressed((double) event.getX(),(double) event.getY())){
+                    joystick.setIsPressed(true);
+                }
                 return true;
 
                 //giu~ de dieu khien(hold)
             case MotionEvent.ACTION_MOVE:
-                player.setPosition((double) event.getX(),(double) event.getY());
+                if(joystick.getIsPressed()) {
+                    joystick.setActuator((double) event.getX(), (double) event.getY());
+
+                }
                 return true;
+            case MotionEvent.ACTION_UP:
+                joystick.setIsPressed(false);
+                joystick.resetActuator();
+                return true;
+
         }
 
         return super.onTouchEvent(event);
@@ -47,6 +58,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         gameLoop = new GameLoop( this, surfaceHolder);
 
+        //nut dieu khien nguoi choi
+        joystick = new Joystick(300,800,120,60);
         //khoi tao nguoi choi (set vi tri xuat hien ban dau tren man hinh)
         player = new Player(getContext(), 1000, 500, 30);
 
@@ -82,7 +95,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         drawFPS(canvas);
         drawUPS(canvas);
-
+        joystick.draw(canvas);
         player.draw(canvas);
 
     }
@@ -105,7 +118,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        player.update();
+        player.update(joystick);
+        joystick.update();
     }
 }
 

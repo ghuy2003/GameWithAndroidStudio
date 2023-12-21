@@ -6,4 +6,6 @@
     <color name="player">#5ABBD3</color>
     <color name="BLUE">#1F44FF</color>
     <color name="GRAY">#BFC6C8</color>
+    <color name="enemy">#703737</color>
+
 </resources>

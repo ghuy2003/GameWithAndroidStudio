@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
+    private final Enemy enemy;
     private GameLoop gameLoop;
 
 
@@ -60,8 +61,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         //nut dieu khien nguoi choi
         joystick = new Joystick(300,800,120,60);
+
         //khoi tao nguoi choi (set vi tri xuat hien ban dau tren man hinh)
-        player = new Player(getContext(), 1000, 500, 30);
+        player = new Player(getContext(),joystick ,1000, 500, 30);
+
+        //khoi tao ke dich
+        enemy = new Enemy(getContext(),player ,500, 200, 30);
 
         setFocusable(true);
     }
@@ -95,10 +100,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         drawFPS(canvas);
         drawUPS(canvas);
+
+
         joystick.draw(canvas);
         player.draw(canvas);
-
+        enemy.draw(canvas);
     }
+
+
+
     public void drawUPS(Canvas canvas){
         String averageUPS = Double.toString(gameLoop.getAverageUPS());
         Paint paint = new Paint();
@@ -118,8 +128,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        player.update(joystick);
+        player.update();
         joystick.update();
+        enemy.update();
     }
 }
 

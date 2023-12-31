@@ -1,15 +1,18 @@
-package vn.edu.tinhoc123.gamewithandroidstudio;
+package vn.edu.tinhoc123.gamewithandroidstudio.object;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
+import vn.edu.tinhoc123.gamewithandroidstudio.GameLoop;
+import vn.edu.tinhoc123.gamewithandroidstudio.Joystick;
+import vn.edu.tinhoc123.gamewithandroidstudio.R;
+
 public class Player extends Circle {
-    public static final double SPEED_PIXELS_PER_SECOND = 400.0;
+    public static final double SPEED_PIXELS_PER_SECOND = 700.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     private final Joystick joystick;
+    
 
 
 

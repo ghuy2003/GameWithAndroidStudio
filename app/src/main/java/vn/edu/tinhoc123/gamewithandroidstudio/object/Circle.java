@@ -1,4 +1,4 @@
-package vn.edu.tinhoc123.gamewithandroidstudio;
+package vn.edu.tinhoc123.gamewithandroidstudio.object;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -14,6 +14,19 @@ public abstract class Circle extends GameObject {
 
         paint = new Paint();
         paint.setColor(color);
+    }
+
+    public static boolean isColliding(Circle obj1, Circle obj2) {
+        double distance = getDistanceBetweenObjects(obj1,obj2);
+        double distanceToCollision = obj1.getRadius() + obj2.getRadius();
+        if (distance < distanceToCollision)
+            return true;
+        else
+            return false;
+    }
+
+    private double getRadius() {
+        return radius;
     }
 
     public void draw(Canvas canvas) {

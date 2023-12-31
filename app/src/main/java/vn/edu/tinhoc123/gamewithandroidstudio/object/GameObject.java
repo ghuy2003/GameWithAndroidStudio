@@ -1,4 +1,4 @@
-package vn.edu.tinhoc123.gamewithandroidstudio;
+package vn.edu.tinhoc123.gamewithandroidstudio.object;
 
 import android.graphics.Canvas;
 

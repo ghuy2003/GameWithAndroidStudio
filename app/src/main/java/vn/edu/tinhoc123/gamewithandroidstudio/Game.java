@@ -6,15 +6,23 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
 import androidx.core.content.ContextCompat;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import vn.edu.tinhoc123.gamewithandroidstudio.object.Circle;
+import vn.edu.tinhoc123.gamewithandroidstudio.object.Enemy;
+import vn.edu.tinhoc123.gamewithandroidstudio.object.Player;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
-    private final Enemy enemy;
+    //private final Enemy enemy;
     private GameLoop gameLoop;
+    private List<Enemy> enemyList = new ArrayList<Enemy>();
 
 
     //player touch event (ctrlshiftA)
@@ -66,8 +74,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player = new Player(getContext(),joystick ,1000, 500, 30);
 
         //khoi tao ke dich
-        enemy = new Enemy(getContext(),player ,500, 200, 30);
+        //enemy = new Enemy(getContext(),player ,500, 200, 30);
 
+        
         setFocusable(true);
     }
 
@@ -104,7 +113,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         joystick.draw(canvas);
         player.draw(canvas);
-        enemy.draw(canvas);
+
+        for (Enemy enemy : enemyList){
+            enemy.draw(canvas);
+        }
     }
 
 
@@ -130,7 +142,22 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void update() {
         player.update();
         joystick.update();
-        enemy.update();
+
+
+        if (Enemy.readyToSpawn()){
+            enemyList.add(new Enemy(getContext(),player));
+        }
+        for (Enemy enemy : enemyList){
+            enemy.update();
+        }
+
+        Iterator<Enemy> iteratorEnemy = enemyList.iterator();
+        while (iteratorEnemy.hasNext()){
+            if (Circle.isColliding(iteratorEnemy.next(),player)){
+                iteratorEnemy.remove();
+            }
+        }
+
     }
 }
 

@@ -13,10 +13,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import vn.edu.tinhoc123.gamewithandroidstudio.object.Circle;
-import vn.edu.tinhoc123.gamewithandroidstudio.object.Enemy;
-import vn.edu.tinhoc123.gamewithandroidstudio.object.Player;
-import vn.edu.tinhoc123.gamewithandroidstudio.object.Spell;
+import vn.edu.tinhoc123.gamewithandroidstudio.gameobject.Circle;
+import vn.edu.tinhoc123.gamewithandroidstudio.gameobject.Enemy;
+import vn.edu.tinhoc123.gamewithandroidstudio.gameobject.Player;
+import vn.edu.tinhoc123.gamewithandroidstudio.gameobject.Spell;
+import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.GameOver;
+import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.Joystick;
+import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.Performance;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
@@ -27,6 +30,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private List<Spell> spellList = new ArrayList<Spell>();
     private int joystickPointerID = 0;
     private int numberOfSpellsToCast = 0;
+    private GameOver gameOver;
+    private Performance performance;
 
 
     //player touch event (ctrlshiftA)
@@ -76,16 +81,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         gameLoop = new GameLoop( this, surfaceHolder);
 
+        gameOver = new GameOver(context);
         //nut dieu khien nguoi choi
         joystick = new Joystick(300,800,120,60);
 
+        performance = new Performance(context, gameLoop);
+
         //khoi tao nguoi choi (set vi tri xuat hien ban dau tren man hinh)
-        player = new Player(getContext(),joystick ,1000, 500, 30);
+        player = new Player(context,joystick ,1000, 500, 30);
 
-        //khoi tao ke dich
-        //enemy = new Enemy(getContext(),player ,500, 200, 30);
-
-        
         setFocusable(true);
     }
 
@@ -116,11 +120,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        drawFPS(canvas);
-        drawUPS(canvas);
-
 
         joystick.draw(canvas);
+        performance.draw(canvas);
         player.draw(canvas);
 
         for (Enemy enemy : enemyList){
@@ -130,30 +132,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             spell.draw(canvas);
         }
 
+        //ve ra man hinh chu "Game Over" neu mau <= 0
+        if (player.getHealthPoints() <= 0 ){
+            gameOver.draw(canvas);
+        }
+
 
     }
 
 
-
-    public void drawUPS(Canvas canvas){
-        String averageUPS = Double.toString(gameLoop.getAverageUPS());
-        Paint paint = new Paint();
-        int color = ContextCompat.getColor(getContext(), R.color.red);
-        paint.setColor(color);
-        paint.setTextSize(50);
-        canvas.drawText("UPS: "+averageUPS, 100, 100, paint);
-    }
-    public void drawFPS(Canvas canvas){
-        String averagePFS = Double.toString(gameLoop.getAverageFPS());
-        Paint paint = new Paint();
-
-        int color = ContextCompat.getColor(getContext(), R.color.red);
-        paint.setColor(color);
-        paint.setTextSize(50);
-        canvas.drawText("FPS: "+averagePFS, 100, 200, paint);
-    }
 
     public void update() {
+
+        //tam dung update game khi "gameOver" (tam dung moi game object khoi update)
+        if (player.getHealthPoints() <= 0){
+            return;
+        }
+
         player.update();
         joystick.update();
 

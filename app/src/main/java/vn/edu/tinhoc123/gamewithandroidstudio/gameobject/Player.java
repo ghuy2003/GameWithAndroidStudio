@@ -1,4 +1,4 @@
-package vn.edu.tinhoc123.gamewithandroidstudio.object;
+package vn.edu.tinhoc123.gamewithandroidstudio.gameobject;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -6,7 +6,8 @@ import android.graphics.Canvas;
 import androidx.core.content.ContextCompat;
 
 import vn.edu.tinhoc123.gamewithandroidstudio.GameLoop;
-import vn.edu.tinhoc123.gamewithandroidstudio.Joystick;
+import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.HealthBar;
+import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.Joystick;
 import vn.edu.tinhoc123.gamewithandroidstudio.R;
 import vn.edu.tinhoc123.gamewithandroidstudio.Utils;
 

@@ -1,4 +1,4 @@
-package vn.edu.tinhoc123.gamewithandroidstudio.object;
+package vn.edu.tinhoc123.gamewithandroidstudio.gamepanel;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,8 +7,9 @@ import android.graphics.Paint;
 import androidx.core.content.ContextCompat;
 
 import vn.edu.tinhoc123.gamewithandroidstudio.R;
+import vn.edu.tinhoc123.gamewithandroidstudio.gameobject.Player;
 
-class HealthBar {
+public class HealthBar {
 
     private Player player;
     private int width, height, margin;

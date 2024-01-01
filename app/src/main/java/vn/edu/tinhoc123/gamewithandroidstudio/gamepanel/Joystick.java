@@ -1,8 +1,10 @@
-package vn.edu.tinhoc123.gamewithandroidstudio;
+package vn.edu.tinhoc123.gamewithandroidstudio.gamepanel;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import vn.edu.tinhoc123.gamewithandroidstudio.Utils;
 
 public class Joystick {
 

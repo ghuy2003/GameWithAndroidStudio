@@ -1,4 +1,4 @@
-package vn.edu.tinhoc123.gamewithandroidstudio.object;
+package vn.edu.tinhoc123.gamewithandroidstudio.gameobject;
 
 import android.content.Context;
 

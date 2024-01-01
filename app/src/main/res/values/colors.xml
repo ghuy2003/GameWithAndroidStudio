@@ -7,5 +7,7 @@
     <color name="BLUE">#1F44FF</color>
     <color name="GRAY">#BFC6C8</color>
     <color name="enemy">#703737</color>
-
+    <color name="spell">#FF00D7</color>
+    <color name="healthBarBorder">#9C9C9C</color>
+    <color name="healthBarHealth">#00F804</color>
 </resources>

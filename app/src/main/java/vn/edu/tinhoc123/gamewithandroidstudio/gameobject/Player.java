@@ -10,7 +10,7 @@ import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.HealthBar;
 import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.Joystick;
 import vn.edu.tinhoc123.gamewithandroidstudio.R;
 import vn.edu.tinhoc123.gamewithandroidstudio.Utils;
-
+//ngay mai add design cua player
 public class Player extends Circle {
     public static final double SPEED_PIXELS_PER_SECOND = 700.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;

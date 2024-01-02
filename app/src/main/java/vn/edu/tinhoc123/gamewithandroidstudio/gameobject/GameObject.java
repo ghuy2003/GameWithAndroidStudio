@@ -2,6 +2,8 @@ package vn.edu.tinhoc123.gamewithandroidstudio.gameobject;
 
 import android.graphics.Canvas;
 
+import vn.edu.tinhoc123.gamewithandroidstudio.GameDisplay;
+
 public abstract class GameObject {
     protected double positionX;
     protected double positionY;
@@ -22,7 +24,7 @@ public abstract class GameObject {
         );
     }
 
-    public abstract void draw(Canvas canvas);
+    public abstract void draw(Canvas canvas, GameDisplay gameDisplay);
     public abstract void update();
 
     public double getPositionX() {

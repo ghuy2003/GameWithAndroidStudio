@@ -6,6 +6,7 @@ import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
+import vn.edu.tinhoc123.gamewithandroidstudio.GameDisplay;
 import vn.edu.tinhoc123.gamewithandroidstudio.R;
 import vn.edu.tinhoc123.gamewithandroidstudio.gameobject.Player;
 
@@ -28,7 +29,7 @@ public class HealthBar {
         int healthColor = ContextCompat.getColor(context, R.color. healthBarHealth);
         healthPaint.setColor(healthColor);
     }
-    public void draw(Canvas canvas){
+    public void draw(Canvas canvas, GameDisplay gameDisplay){
 
         float x = (float) player.getPositionX();
         float y = (float) player.getPositionY();
@@ -41,7 +42,13 @@ public class HealthBar {
         borderRight = x + width/2;
         borderBottom = y - distanceToPlayer;
         borderTop = borderBottom - height;
-        canvas.drawRect(borderLeft, borderTop, borderRight,  borderBottom, borderPaint);
+        canvas.drawRect(
+                (float) gameDisplay.gameDisplayPositionX(borderLeft),
+                (float) gameDisplay.gameDisplayPositionY(borderTop),
+                (float) gameDisplay.gameDisplayPositionX(borderRight),
+                (float) gameDisplay.gameDisplayPositionY(borderBottom),
+                borderPaint
+        );
 
 
         //ve mau ( health trong khung)
@@ -52,7 +59,13 @@ public class HealthBar {
         healthRight = healthLeft + healthWidth * healthPointsPercentage;
         healthBottom = borderBottom - margin;
         healthTop = healthBottom - healthHeight;
-        canvas.drawRect(healthLeft, healthTop, healthRight, healthBottom, healthPaint);
+        canvas.drawRect(
+                (float) gameDisplay.gameDisplayPositionX(healthLeft),
+                (float) gameDisplay.gameDisplayPositionY(healthTop),
+                (float) gameDisplay.gameDisplayPositionX(healthRight),
+                (float) gameDisplay.gameDisplayPositionY(healthBottom),
+                healthPaint
+        );
     }
 
 }

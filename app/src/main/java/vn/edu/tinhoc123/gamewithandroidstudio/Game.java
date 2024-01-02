@@ -1,8 +1,10 @@
 package vn.edu.tinhoc123.gamewithandroidstudio;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -33,6 +35,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int numberOfSpellsToCast = 0;
     private GameOver gameOver;
     private Performance performance;
+    private GameDisplay gameDisplay;
+
 
 
     //player touch event (ctrlshiftA)
@@ -91,6 +95,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         //khoi tao nguoi choi (set vi tri xuat hien ban dau tren man hinh)
         player = new Player(context,joystick ,1000, 500, 30);
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        gameDisplay = new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
+
         setFocusable(true);
     }
 
@@ -128,13 +136,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         joystick.draw(canvas);
         performance.draw(canvas);
-        player.draw(canvas);
+        player.draw(canvas, gameDisplay);
 
         for (Enemy enemy : enemyList){
-            enemy.draw(canvas);
+            enemy.draw(canvas, gameDisplay);
         }
         for (Spell spell : spellList){
-            spell.draw(canvas);
+            spell.draw(canvas, gameDisplay);
         }
 
         //ve ra man hinh chu "Game Over" neu mau <= 0
@@ -194,6 +202,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
         }
+
+        gameDisplay.update();
 
     }
 

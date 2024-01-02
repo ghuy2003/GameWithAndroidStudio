@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import vn.edu.tinhoc123.gamewithandroidstudio.GameDisplay;
+
 public abstract class Circle extends GameObject {
     protected double radius;
     protected Paint paint;
@@ -29,7 +31,12 @@ public abstract class Circle extends GameObject {
         return radius;
     }
 
-    public void draw(Canvas canvas) {
-        canvas.drawCircle((float)positionX,(float)positionY,(float)radius,paint);
+    public void draw(Canvas canvas, GameDisplay gameDisplay) {
+        canvas.drawCircle(
+                (float)gameDisplay.gameDisplayPositionX(positionX),
+                (float)gameDisplay.gameDisplayPositionY(positionY),
+                (float)radius,
+                paint
+        );
     }
 }

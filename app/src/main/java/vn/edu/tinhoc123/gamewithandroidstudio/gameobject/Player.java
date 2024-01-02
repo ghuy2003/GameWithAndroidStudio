@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 
 import androidx.core.content.ContextCompat;
 
+import vn.edu.tinhoc123.gamewithandroidstudio.GameDisplay;
 import vn.edu.tinhoc123.gamewithandroidstudio.GameLoop;
 import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.HealthBar;
 import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.Joystick;
@@ -48,9 +49,9 @@ public class Player extends Circle {
     }
 
 
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
-        healthBar.draw(canvas);
+    public void draw(Canvas canvas, GameDisplay gameDisplay) {
+        super.draw(canvas, gameDisplay);
+        healthBar.draw(canvas, gameDisplay);
     }
 
     public int getHealthPoints() {

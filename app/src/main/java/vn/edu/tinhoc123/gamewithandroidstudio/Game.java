@@ -23,10 +23,14 @@ import vn.edu.tinhoc123.gamewithandroidstudio.gameobject.Spell;
 import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.GameOver;
 import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.Joystick;
 import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.Performance;
+import vn.edu.tinhoc123.gamewithandroidstudio.graphics.Animator;
+import vn.edu.tinhoc123.gamewithandroidstudio.graphics.SpriteSheet;
+import vn.edu.tinhoc123.gamewithandroidstudio.map.Tilemap;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private final Joystick joystick;
+    private final Tilemap tilemap;
     //private final Enemy enemy;
     private GameLoop gameLoop;
     private List<Enemy> enemyList = new ArrayList<Enemy>();
@@ -92,12 +96,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         performance = new Performance(context, gameLoop);
 
+
+        SpriteSheet spriteSheet = new SpriteSheet(context);
+        Animator animator = new Animator(spriteSheet.getPlayerSpriteArray());
+
         //khoi tao nguoi choi (set vi tri xuat hien ban dau tren man hinh)
-        player = new Player(context,joystick ,1000, 500, 30);
+        player = new Player(context,joystick ,1000, 500, 32, animator);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         gameDisplay = new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
+
+
+        tilemap = new Tilemap(spriteSheet);
 
         setFocusable(true);
     }
@@ -133,6 +144,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+
+        //draw tilemap
+        tilemap.draw(canvas, gameDisplay);
 
         joystick.draw(canvas);
         performance.draw(canvas);

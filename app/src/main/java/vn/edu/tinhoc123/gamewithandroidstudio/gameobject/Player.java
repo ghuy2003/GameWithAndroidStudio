@@ -11,6 +11,9 @@ import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.HealthBar;
 import vn.edu.tinhoc123.gamewithandroidstudio.gamepanel.Joystick;
 import vn.edu.tinhoc123.gamewithandroidstudio.R;
 import vn.edu.tinhoc123.gamewithandroidstudio.Utils;
+import vn.edu.tinhoc123.gamewithandroidstudio.graphics.Animator;
+import vn.edu.tinhoc123.gamewithandroidstudio.graphics.Sprite;
+
 //ngay mai add design cua playera
 public class Player extends Circle {
     public static final double SPEED_PIXELS_PER_SECOND = 700.0;
@@ -19,15 +22,18 @@ public class Player extends Circle {
     private final Joystick joystick;
     private HealthBar healthBar;
     private int healthPoints;
-    
+    private Animator animator;
+    private PlayerState playerState;
 
 
-
-    public Player(Context context,Joystick joystick, double positionX,double positionY,double radius){
+    public Player(Context context, Joystick joystick, double positionX, double positionY, double radius, Animator animator){
         super(context, ContextCompat.getColor(context, R.color.player), positionX, positionY, radius);
         this.joystick = joystick;
         this.healthBar = new HealthBar(context,this);
         this.healthPoints = MAX_HEALTH_POINTS;
+
+        this.animator = animator;
+        this.playerState = new PlayerState(this);
     }
 
     public void update() {
@@ -42,7 +48,12 @@ public class Player extends Circle {
             directionX = velocityX/distance;
             directionY = velocityY/distance;
         }
+
+        playerState.update();
+
     }
+
+
     public void setPosition(double positionX, double positionY) {
         this.positionX=positionX;
         this.positionY=positionY;
@@ -50,7 +61,8 @@ public class Player extends Circle {
 
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
-        super.draw(canvas, gameDisplay);
+        animator.draw(canvas, gameDisplay, this);
+
         healthBar.draw(canvas, gameDisplay);
     }
 
@@ -62,5 +74,9 @@ public class Player extends Circle {
         //khong duoc am mau (health)
         if (healthPoints >= 0)
             this.healthPoints = healthPoints;
+    }
+
+    public PlayerState getPlayerState(){
+        return playerState;
     }
 }

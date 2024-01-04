@@ -17,7 +17,7 @@ public class Spell extends Circle {
                 spellcaster.getPositionX(),
                 spellcaster.getPositionY(),
 
-                25
+                10
         );
         velocityX = spellcaster.getDirectionX()*MAX_SPEED;
         velocityY = spellcaster.getDirectionY()*MAX_SPEED;

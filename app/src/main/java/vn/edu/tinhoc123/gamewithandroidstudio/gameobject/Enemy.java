@@ -10,9 +10,9 @@ import vn.edu.tinhoc123.gamewithandroidstudio.R;
 //di chuyen tuong tu nhu player nhung thay vi dung joystick thi se di theo huong nguoi choi
 public class Enemy extends Circle {
 
-    private static final double SPEED_PIXELS_PER_SECOND = Player.SPEED_PIXELS_PER_SECOND*0.8;
+    private static final double SPEED_PIXELS_PER_SECOND = Player.SPEED_PIXELS_PER_SECOND*0.9;
     private static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
-    private static final double SPAWNS_PER_MINUTE = 20;
+    private static final double SPAWNS_PER_MINUTE = 25;
     private static final double SPAWNS_PER_SECOND = SPAWNS_PER_MINUTE / 60.0;
     private static final double UPDATES_PER_SPAWN = GameLoop.MAX_UPS/SPAWNS_PER_SECOND;
     private static double updateUntilNextSpawn = UPDATES_PER_SPAWN;
@@ -30,7 +30,7 @@ public class Enemy extends Circle {
                 Math.random()*1000,
                 Math.random()*1000,
 
-                30
+                20
         );
         this.player = player;
     }

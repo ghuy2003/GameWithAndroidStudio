@@ -101,7 +101,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         Animator animator = new Animator(spriteSheet.getPlayerSpriteArray());
 
         //khoi tao nguoi choi (set vi tri xuat hien ban dau tren man hinh)
-        player = new Player(context,joystick ,1000, 500, 32, animator);
+        player = new Player(context,joystick ,1000, 500, 30, animator);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -202,10 +202,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 player.setHealthPoints(player.getHealthPoints() - 1);
                 continue;
             }
-
-
-
-
             Iterator<Spell> iteratorSpell = spellList.iterator();
             while (iteratorSpell.hasNext()){
                 Circle spell = iteratorSpell.next();

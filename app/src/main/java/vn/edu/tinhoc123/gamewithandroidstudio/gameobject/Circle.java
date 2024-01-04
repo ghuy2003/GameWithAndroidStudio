@@ -18,6 +18,8 @@ public abstract class Circle extends GameObject {
         paint.setColor(color);
     }
 
+
+    //kiểm tra va chạm giữa 2 hình tròn
     public static boolean isColliding(Circle obj1, Circle obj2) {
         double distance = getDistanceBetweenObjects(obj1,obj2);
         double distanceToCollision = obj1.getRadius() + obj2.getRadius();

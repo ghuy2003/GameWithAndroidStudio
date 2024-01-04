@@ -16,7 +16,7 @@ import vn.edu.tinhoc123.gamewithandroidstudio.graphics.Sprite;
 
 //ngay mai add design cua playera
 public class Player extends Circle {
-    public static final double SPEED_PIXELS_PER_SECOND = 700.0;
+    public static final double SPEED_PIXELS_PER_SECOND = 400.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     public static final int MAX_HEALTH_POINTS = 10;
     private final Joystick joystick;
